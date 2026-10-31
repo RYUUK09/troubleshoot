@@ -1,0 +1,341 @@
+{
+  "total_cases": 28,
+  "test_cases": [
+    {
+      "test_id": "TC-NET-01",
+      "domain": "Network Troubleshooting",
+      "name": "Wi-Fi Adapter Disabled Scenario",
+      "facts": {
+        "wifi_adapter_enabled": "NO"
+      },
+      "expected_diagnosis": "Wi-Fi Adapter Disabled or Hardware Faulty",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-NET-02",
+      "domain": "Network Troubleshooting",
+      "name": "Weak Signal Interference",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "wi_fi_signal_strong": "NO"
+      },
+      "expected_diagnosis": "Wi-Fi Signal Degradation and Physical Interference",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-NET-03",
+      "domain": "Network Troubleshooting",
+      "name": "Public IP Pingable But DNS Unresponsive",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "router_gateway_ping_success": "YES",
+        "public_ip_ping_success": "YES",
+        "dns_domain_resolves": "NO"
+      },
+      "expected_diagnosis": "DNS Server Resolution Failure",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-NET-04",
+      "domain": "Network Troubleshooting",
+      "name": "Captive Portal Splash Screen Intercept",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "router_gateway_ping_success": "YES",
+        "public_ip_ping_success": "NO",
+        "captive_portal_detected": "YES"
+      },
+      "expected_diagnosis": "Unauthenticated Captive Portal Interception",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-NET-05",
+      "domain": "Network Troubleshooting",
+      "name": "ISP Upstream Fiber Outage",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "router_gateway_ping_success": "YES",
+        "public_ip_ping_success": "NO",
+        "router_internet_light_green": "NO",
+        "captive_portal_detected": "NO"
+      },
+      "expected_diagnosis": "ISP Upstream Service Outage or Fiber Cut",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-NET-06",
+      "domain": "Network Troubleshooting",
+      "name": "Local Subnet IP Collision",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "duplicate_ip_alert": "YES"
+      },
+      "expected_diagnosis": "IP Address Conflict on Local Subnet",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-NET-07",
+      "domain": "Network Troubleshooting",
+      "name": "Fully Operational Link",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "router_gateway_ping_success": "YES",
+        "public_ip_ping_success": "YES",
+        "dns_domain_resolves": "YES",
+        "wi_fi_signal_strong": "YES"
+      },
+      "expected_diagnosis": "Fully Operational Network and DNS Resolution",
+      "category": "Full Stack Verification"
+    },
+    {
+      "test_id": "TC-NET-08",
+      "domain": "Network Troubleshooting",
+      "name": "Mesh Wi-Fi STP Broadcast Storm Loop",
+      "facts": {
+        "wifi_adapter_enabled": "YES",
+        "local_network_connected": "YES",
+        "router_gateway_ping_success": "NO",
+        "mesh_satellite_ethernet_backhaul": "YES",
+        "switch_port_blinking_furious": "YES"
+      },
+      "expected_diagnosis": "Spanning Tree Protocol Loop / Ethernet Backhaul Broadcast Storm",
+      "category": "Novel Scenario (Expert Learning Test)"
+    },
+    {
+      "test_id": "TC-SOFT-01",
+      "domain": "Software Troubleshooting",
+      "name": "OS Architecture Incompatibility",
+      "facts": {
+        "system_meets_minimum_os_version": "NO"
+      },
+      "expected_diagnosis": "Operating System Architecture or Version Incompatibility",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-SOFT-02",
+      "domain": "Software Troubleshooting",
+      "name": "Disk Exhaustion",
+      "facts": {
+        "available_disk_space_sufficient": "NO"
+      },
+      "expected_diagnosis": "Insufficient System Storage / Disk Full",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-SOFT-03",
+      "domain": "Software Troubleshooting",
+      "name": "Missing Visual C++ Runtime DLL",
+      "facts": {
+        "system_meets_minimum_os_version": "YES",
+        "available_disk_space_sufficient": "YES",
+        "visual_c_runtimes_installed": "NO",
+        "error_code_missing_dll": "YES"
+      },
+      "expected_diagnosis": "Missing Dynamic Link Libraries (C++ / .NET Runtimes)",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-SOFT-04",
+      "domain": "Software Troubleshooting",
+      "name": "Antivirus Quarantine Lockout",
+      "facts": {
+        "antivirus_quarantine_alert": "YES",
+        "app_opens_at_all": "NO"
+      },
+      "expected_diagnosis": "Antivirus Quarantine Lock or False-Positive Block",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-SOFT-05",
+      "domain": "Software Troubleshooting",
+      "name": "UAC Privileges Rejected",
+      "facts": {
+        "system_meets_minimum_os_version": "YES",
+        "available_disk_space_sufficient": "YES",
+        "app_launched_as_administrator": "NO",
+        "config_cache_folder_writable": "NO"
+      },
+      "expected_diagnosis": "Insufficient User Access Permissions (UAC / File System ACLs)",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-SOFT-06",
+      "domain": "Software Troubleshooting",
+      "name": "Memory Leak Freeze",
+      "facts": {
+        "app_opens_at_all": "YES",
+        "high_memory_usage_freeze": "YES"
+      },
+      "expected_diagnosis": "Application Memory Leak / Out-of-Memory Freeze",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-SOFT-07",
+      "domain": "Software Troubleshooting",
+      "name": "Local Server Port Binding Collision",
+      "facts": {
+        "system_meets_minimum_os_version": "YES",
+        "available_disk_space_sufficient": "YES",
+        "error_code_missing_dll": "NO",
+        "socket_address_already_in_use_error": "YES"
+      },
+      "expected_diagnosis": "TCP Socket Address Already in Use (Port Collision)",
+      "category": "Novel Scenario (Expert Learning Test)"
+    },
+    {
+      "test_id": "TC-VEH-01",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Completely Dead Battery",
+      "facts": {
+        "dashboard_lights_illuminate": "NO"
+      },
+      "expected_diagnosis": "Depleted or Discharged 12V Starter Battery",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-VEH-02",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Starter Solenoid Clicking Chatter",
+      "facts": {
+        "dashboard_lights_illuminate": "YES",
+        "starter_rapid_clicking_sound": "YES"
+      },
+      "expected_diagnosis": "Low Battery Voltage Causing Starter Solenoid Chatter",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-VEH-03",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Starter Motor Circuit Fault",
+      "facts": {
+        "dashboard_lights_illuminate": "YES",
+        "starter_rapid_clicking_sound": "NO",
+        "starter_motor_cranks_engine": "NO"
+      },
+      "expected_diagnosis": "Faulty Starter Motor or Starter Relay Circuit",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-VEH-04",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Engine Cranks But Empty Fuel Tank",
+      "facts": {
+        "dashboard_lights_illuminate": "YES",
+        "starter_rapid_clicking_sound": "NO",
+        "starter_motor_cranks_engine": "YES",
+        "fuel_level_sufficient": "NO"
+      },
+      "expected_diagnosis": "Fuel Starvation or Depleted Fuel Tank",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-VEH-05",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Boiling Radiator Coolant Emergency",
+      "facts": {
+        "engine_overheating_gauge_in_red": "YES",
+        "steam_escaping_from_hood": "YES"
+      },
+      "expected_diagnosis": "CRITICAL: Severe Engine Thermal Overheating / Coolant Loss",
+      "category": "Safety Critical Scenario"
+    },
+    {
+      "test_id": "TC-VEH-06",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Tyre Puncture with Audible Hiss",
+      "facts": {
+        "tyre_pressure_warning_light_on": "YES",
+        "audible_tyre_air_hiss": "YES"
+      },
+      "expected_diagnosis": "Tyre Pressure Deflation / Slow Tread Puncture",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-VEH-07",
+      "domain": "Vehicle Troubleshooting",
+      "name": "Acoustic Brake Wear Squeal",
+      "facts": {
+        "brake_wear_indicator_squeal": "YES"
+      },
+      "expected_diagnosis": "Brake Friction Pad Material Wear / Acoustic Sensor Alert",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-IOT-01",
+      "domain": "IoT & Hardware Troubleshooting",
+      "name": "Unpowered MCU Board",
+      "facts": {
+        "mcu_power_led_lit": "NO"
+      },
+      "expected_diagnosis": "Total Board Power Deprivation / Open Circuit",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-IOT-02",
+      "domain": "IoT & Hardware Troubleshooting",
+      "name": "ESP32 RF Transmit Brownout",
+      "facts": {
+        "mcu_power_led_lit": "YES",
+        "supply_voltage_drops_under_load": "YES"
+      },
+      "expected_diagnosis": "Power Supply Brownout Under Radio Frequency Transmit Peak",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-IOT-03",
+      "domain": "IoT & Hardware Troubleshooting",
+      "name": "Missing USB UART Driver",
+      "facts": {
+        "mcu_power_led_lit": "YES",
+        "usb_port_recognized_in_os": "NO"
+      },
+      "expected_diagnosis": "Missing USB-to-UART Bridge Driver (CH340 / CP2102)",
+      "category": "Clear Confirmation"
+    },
+    {
+      "test_id": "TC-IOT-04",
+      "domain": "IoT & Hardware Troubleshooting",
+      "name": "ESP Flash Mode GPIO0 Bootloader Timeout",
+      "facts": {
+        "mcu_power_led_lit": "YES",
+        "supply_voltage_drops_under_load": "NO",
+        "usb_port_recognized_in_os": "YES",
+        "firmware_upload_timed_out": "YES",
+        "boot_button_pressed_during_flash": "NO"
+      },
+      "expected_diagnosis": "Microcontroller Bootloader Synchronization Failure",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-IOT-05",
+      "domain": "IoT & Hardware Troubleshooting",
+      "name": "I2C Floating Lines Without Pullups",
+      "facts": {
+        "mcu_power_led_lit": "YES",
+        "supply_voltage_drops_under_load": "NO",
+        "pull_up_resistors_installed": "NO",
+        "i2c_bus_scanner_detects_address": "NO"
+      },
+      "expected_diagnosis": "Floating I2C Bus / Missing Bus Pull-Up Resistors",
+      "category": "Multi-Level Backward Chaining"
+    },
+    {
+      "test_id": "TC-IOT-06",
+      "domain": "IoT & Hardware Troubleshooting",
+      "name": "5V to 3.3V Logic Level Incompatibility",
+      "facts": {
+        "mcu_power_led_lit": "YES",
+        "supply_voltage_drops_under_load": "NO",
+        "logic_voltage_level_matched": "NO"
+      },
+      "expected_diagnosis": "Logic Voltage Level Clamping / Incompatible Thresholds",
+      "category": "Multi-Level Backward Chaining"
+    }
+  ]
+}

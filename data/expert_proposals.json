@@ -1,0 +1,107 @@
+[
+  {
+    "proposal_id": "EXP-PROP-001",
+    "rule_id": "R-NET-EXP-001",
+    "domain": "Network Troubleshooting",
+    "diagnosis": "Spanning Tree Protocol Loop / Ethernet Backhaul Broadcast Storm",
+    "conditions": [
+      {
+        "fact": "local_network_connected",
+        "expected_value": "YES",
+        "description": "Is your device connected to the local Wi-Fi network / Access Point?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "router_gateway_ping_success",
+        "expected_value": "NO",
+        "description": "Can your device successfully ping the local default gateway IP (e.g. 192.168.1.1)?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "mesh_satellite_ethernet_backhaul",
+        "expected_value": "YES",
+        "description": "Are mesh access point satellites connected via wired Ethernet backhaul switches?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "switch_port_blinking_furious",
+        "expected_value": "YES",
+        "description": "Are network switch port activity lights flashing continuously at extreme frequency (broadcast storm)?",
+        "is_intermediate": false
+      }
+    ],
+    "explanation": "An unmanaged switch without IEEE 802.1D/w STP has formed a bridging loop between wired and wireless backhauls, causing packet storm saturation.",
+    "solution": "1. Temporarily unplug the Ethernet cable from the satellite mesh nodes.\n2. Enable Spanning Tree Protocol (STP/RSTP) in your managed switch configuration.\n3. Verify whether your mesh system supports simultaneous wired backhaul or requires AP isolation.",
+    "approval_status": "APPROVED",
+    "author": "Dr. Sarah Lin (Senior Network Architect)",
+    "created_at": "2026-10-31",
+    "reviewed_by": "Chief Expert Reviewer",
+    "review_notes": "Validated: Solves frequent mesh network bridging storms reported in enterprise and home installations."
+  },
+  {
+    "proposal_id": "EXP-PROP-002",
+    "rule_id": "R-SOFT-EXP-001",
+    "domain": "Software Troubleshooting",
+    "diagnosis": "TCP Socket Address Already in Use (Port Collision)",
+    "conditions": [
+      {
+        "fact": "system_meets_minimum_os_version",
+        "expected_value": "YES",
+        "description": "Does your computer meet the software's minimum OS version and architecture requirements?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "available_disk_space_sufficient",
+        "expected_value": "YES",
+        "description": "Do you have at least 5 GB of free storage space on your system partition?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "error_code_missing_dll",
+        "expected_value": "NO",
+        "description": "Does an error dialog specifically mention missing DLLs?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "socket_address_already_in_use_error",
+        "expected_value": "YES",
+        "description": "Does application console output report 'Errno 98 / 10048: Address already in use' or port bind collision?",
+        "is_intermediate": false
+      }
+    ],
+    "explanation": "Another active process or orphaned daemon has already bound exclusively to the designated TCP/IP listening socket.",
+    "solution": "1. Run 'netstat -ano | findstr <port_number>' in terminal to identify the conflicting PID.\n2. Terminate the blocking process via 'taskkill /PID <pid> /F' or Task Manager.\n3. Alternatively, reconfigure the application port setting to an available port.",
+    "approval_status": "APPROVED",
+    "author": "DevOps Engineer Alex Kumar",
+    "created_at": "2026-10-31",
+    "reviewed_by": "Lead Software Systems Reviewer",
+    "review_notes": "Crucial addition for developer and server software runtime troubleshooting."
+  },
+  {
+    "proposal_id": "EXP-PROP-003",
+    "rule_id": "R-IOT-EXP-001",
+    "domain": "IoT & Hardware Troubleshooting",
+    "diagnosis": "SPI Bus Clock Phase/Polarity (CPOL/CPHA Mode) Inversion",
+    "conditions": [
+      {
+        "fact": "mcu_power_led_lit",
+        "expected_value": "YES",
+        "description": "Is the onboard Power LED steadily illuminated?",
+        "is_intermediate": false
+      },
+      {
+        "fact": "spi_data_shifted_by_one_bit",
+        "expected_value": "YES",
+        "description": "Are SPI sensor register bytes arriving bit-shifted or inverted (e.g. 0xAA received as 0x55)?",
+        "is_intermediate": false
+      }
+    ],
+    "explanation": "The microcontroller SPI master is sampling data on the wrong clock edge (Mode 0 vs Mode 3 mismatch).",
+    "solution": "1. Check the sensor datasheet for SPI Mode specification (CPOL 0/1, CPHA 0/1).\n2. Update SPI.beginTransaction(SPISettings(..., SPI_MODE0/1/2/3)) in firmware.",
+    "approval_status": "PENDING_REVIEW",
+    "author": "Embedded Systems Engineer Maria R.",
+    "created_at": "2026-10-31",
+    "reviewed_by": null,
+    "review_notes": "Under review for formal bus timing verification."
+  }
+]
